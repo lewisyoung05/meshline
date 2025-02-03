@@ -71,9 +71,9 @@
     this.matrixWorld = matrixWorld
   }
 
-  // setting via a geometry is rather superfluous
-  // as you're creating a unecessary geometry just to throw away
-  // but exists to support previous api
+  // setting via a geometry
+  // as you're creating geometry you don't need bin it
+  // but exists to support any api
   MeshLine.prototype.setGeometry = function(g, c) {
 		// as the input geometry are mutated we store them
 		// for later retreival when necessary (declaritive architectures)
@@ -89,7 +89,7 @@
 			return;
 		}
 		// as the points are mutated we store them
-		// for later retreival when necessary (declaritive architectures)
+		// for later retreival when necessary
 		this._points = points;
 		this.widthCallback = wcb;
 		this.positions = [];
@@ -249,7 +249,7 @@
         this.indices_array.push(n + 2, n + 1, n + 3)
       }
       if (j > 0) {
-        // points after poisitions
+        // points after positions
         v = this.copyV3(j)
         this.next.push(v[0], v[1], v[2])
         this.next.push(v[0], v[1], v[2])
@@ -266,7 +266,7 @@
     this.next.push(v[0], v[1], v[2])
 
     // redefining the attribute seems to prevent range errors
-    // if the user sets a differing number of vertices
+    // if the user sets a differing number of verticles
     if (!this._attributes || this._attributes.position.count !== this.positions.length) {
       this._attributes = {
         position: new THREE.BufferAttribute(new Float32Array(this.positions), 3),
@@ -334,7 +334,7 @@
 
   /**
    * Fast method to advance the line by one position.  The oldest position is removed.
-   * @param position
+   * position
    */
   MeshLine.prototype.advance = function(position) {
     var positions = this._attributes.position.array
